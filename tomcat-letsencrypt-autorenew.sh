@@ -33,8 +33,10 @@ renew_ssl () {
  }
 
 # Convert that PKCS12 to a JKS
-rm -f /etc/letsencrypt/${DOMAIN}.jks 2>/dev/null
-keytool -importkeystore -deststorepass $TOMCAT_KEY_PASS -destkeypass $TOMCAT_KEY_PASS -destkeystore /etc/letsencrypt/${DOMAIN}.jks -srckeystore /etc/letsencrypt/fullchain_and_key.p12 -srcstoretype PKCS12 -srcstorepass $TOMCAT_KEY_PASS -alias tomcat
+pkcs2jks () {
+    rm -f /etc/letsencrypt/${DOMAIN}.jks 2>/dev/null
+    keytool -importkeystore -deststorepass $TOMCAT_KEY_PASS -destkeypass $TOMCAT_KEY_PASS -destkeystore /etc/letsencrypt/${DOMAIN}.jks -srckeystore /etc/letsencrypt/fullchain_and_key.p12 -srcstoretype PKCS12 -srcstorepass $TOMCAT_KEY_PASS -alias tomcat
+}
 
 # Send email notification on completion
 send_email_notification () {
@@ -61,4 +63,5 @@ send_email_notification () {
 
 install_certbot
 renew_ssl
+pkcs2jks
 send_email_notification
