@@ -32,8 +32,7 @@ $ sudo cp tomcat-letsencrypt-autorenew.sh /usr/local/bin
 The execute the script with:
 
 ```
-$ sudo su -
-# /usr/local/bin/tomcat-letsencrypt-autorenew.sh
+$ sudo /usr/local/bin/tomcat-letsencrypt-autorenew.sh
 ```
 
 If you don't need email notification. you can skip the `send_email_notification` function.
